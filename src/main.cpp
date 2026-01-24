@@ -304,6 +304,10 @@ int __time_critical_func(main)()
 
     earlyGpioInit();
 
+#if !defined(DETECT_CONSOLE_TYPE) && !defined(ENABLE_NTRBOOT)
+	setRomToMainRom();
+#endif
+
     sProgramOffset = pio_add_program(pio0, &ntr_card_program);
 #ifdef DSPICO_ENABLE_WRFUXXED
     u32 spiUartProgOffs = pio_add_program(pio0, &ntr_card_spi_program);
